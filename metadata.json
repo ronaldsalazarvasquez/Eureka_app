@@ -1,0 +1,5 @@
+{
+  "name": "Eureka",
+  "description": "An application for academic project repositories, allowing submission, an approval workflow, public visibility, filtering, and rating of projects.",
+  "requestFramePermissions": []
+}
