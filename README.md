@@ -49,18 +49,13 @@
 
 | Tecnología | Uso |
 |------------|-----|
-| **React 18** | Framework principal |
+| **React** | Framework principal |
 | **TypeScript** | Tipado estático |
 | **Vite** | Build tool y dev server |
 | **TailwindCSS** | Estilos y diseño responsivo |
 | **React Hooks** | Gestión de estado (`useState`, `useEffect`, `useCallback`) |
 | **Heroicons & SVG** | Iconografía personalizada |
 
-### Datos mockeados (preparado para backend)
-- `constants.tsx` → MOCK_PROJECTS, MOCK_AUTHORS
-- `users.json` → Autenticación local
-
----
 
 ## 📦 Instalación y ejecución local
 
