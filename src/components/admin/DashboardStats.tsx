@@ -1,6 +1,6 @@
 import React from 'react';
-import { Project, Status, Campus, Category } from '../../types';
-import { ClipboardListIcon, ClockIcon, BuildingOfficeIcon, ChartPieIcon, ChartBarIcon } from '../../constants';
+import { Project, Status, Campus, Category } from '../../../types';
+import { ClipboardListIcon, ClockIcon, BuildingOfficeIcon, ChartPieIcon, ChartBarIcon } from '../../../constants';
 
 interface DashboardStatsProps {
     projects: Project[];
@@ -155,7 +155,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ projects }) => {
         return acc;
     }, {} as Record<string, { label: string; value: number }>);
     
-    const monthlyData = Object.values(submissionsByMonth);
+    const monthlyData = Object.values(submissionsByMonth) as { label: string; value: number }[];
     const maxMonthlySubmissions = Math.max(...monthlyData.map(d => d.value), 1);
 
     return (

@@ -15,12 +15,13 @@ export enum Campus {
   Arequipa = 'Sede Arequipa',
   Cusco = 'Sede Cusco',
   Trujillo = 'Sede Trujillo',
-  Piura = 'Sede Piura'
+  Piura = 'Sede Piura',
+  Chiclayo = 'Sede Chiclayo'
 }
 
 export enum Role {
-  Student = 'Estudiante',
-  Admin = 'Administrador',
+  Admin = "Admin",
+  Student = "Student"
 }
 
 export interface User {

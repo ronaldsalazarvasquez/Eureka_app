@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Comment, User } from '../types';
-import { MOCK_AUTHORS } from '../constants';
+import { Comment, User } from '../../../types';
+import { MOCK_AUTHORS } from '../../../constants';
 import CommentForm from './CommentForm';
 import CommentThread from './CommentThread';
 

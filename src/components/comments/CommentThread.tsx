@@ -1,5 +1,5 @@
 import React from 'react';
-import { Comment, User } from '../types';
+import { Comment, User } from '../../../types';
 import CommentItem from './CommentItem';
 
 interface CommentThreadProps {
@@ -7,7 +7,7 @@ interface CommentThreadProps {
   onAddNewComment: (projectId: number, text: string, parentId?: string) => void;
   projectId: number;
   currentUser: User | null;
-  onSelectAuthor: (authorName: string) => void; // ✅ nueva prop
+  onSelectAuthor: (authorName: string) => void; 
 }
 
 const CommentThread: React.FC<CommentThreadProps> = ({

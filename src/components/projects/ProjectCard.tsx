@@ -1,8 +1,8 @@
 import React from 'react';
-import { Project } from '../types';
-import StatusBadge from './StatusBadge';
-import StarRating from './StarRating';
-import { EyeIcon, TrophyIcon } from '../constants';
+import { Project } from '@/types';
+import StatusBadge from '../ui/StatusBadge';
+import StarRating from '../ui/StarRating';
+import { EyeIcon, TrophyIcon } from '@/constants';
 
 interface ProjectCardProps {
     project: Project;

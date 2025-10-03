@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Project, User, Role, Status } from '../types';
-import StatusBadge from './StatusBadge';
-import StarRating from './StarRating';
-import Timeline from './Timeline';
-import { GithubIcon, EyeIcon, ProblemIcon, CodeIcon, ImpactIcon } from '../constants';
-import CommentForm from './CommentForm';
-import CommentThread from './CommentThread';
+import { Project, User, Role, Status } from '@/types';
+import StatusBadge from '../ui/StatusBadge';
+import StarRating from '../ui/StarRating';
+import Timeline from '../ui/Timeline';
+import { GithubIcon, EyeIcon, ProblemIcon, CodeIcon, ImpactIcon } from '../../../constants';
+import CommentForm from '../comments/CommentForm';
+import CommentThread from '../comments/CommentThread';
 
 interface ProjectModalProps {
     project: Project;

@@ -1,0 +1,5 @@
+{
+  "name": "Eureka",
+  "description": "Una aplicación para repositorios de proyectos académicos, que permite la presentación, un flujo de trabajo de aprobación, visibilidad pública, filtrado y calificación de proyectos.",
+  "requestFramePermissions": []
+}

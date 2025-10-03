@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ApprovalHistory, Status } from '../types';
+import { ApprovalHistory, Status } from '../../../types';
 
 interface TimelineProps {
     history: ApprovalHistory[];

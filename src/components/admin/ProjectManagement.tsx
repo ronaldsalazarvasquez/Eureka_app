@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Project, Category, Campus } from '../../types';
-import FilterBar from '../FilterBar';
-import ProjectGrid from '../ProjectGrid';
+import { Project, Category, Campus } from '../../../types';
+import FilterBar from '../ui/FilterBar';
+import ProjectGrid from '../projects/ProjectGrid';
 import PendingProjectsTable from './PendingProjectsTable';
 
 interface ProjectManagementProps {

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Category, Campus } from '../types';
+import { Category, Campus } from '../../../types';
 
 interface FilterBarProps {
     searchTerm: string;

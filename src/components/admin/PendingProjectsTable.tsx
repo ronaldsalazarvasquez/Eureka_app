@@ -1,6 +1,6 @@
 import React from 'react';
-import { Project, Status } from '../../types';
-import StatusBadge from '../StatusBadge';
+import { Project, Status } from '../../../types';
+import StatusBadge from '../ui/StatusBadge';
 
 interface PendingProjectsTableProps {
     projects: Project[];

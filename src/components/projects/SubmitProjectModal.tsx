@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Category, Campus } from '../types';
-import { NewProjectData } from '../App';
+import { Category, Campus } from '@/types';
+import { NewProjectData } from '@/App';
+//import { NewProjectData } from '../App';
 
 // FIX: Define missing props interface for SubmitProjectModal
 interface SubmitProjectModalProps {

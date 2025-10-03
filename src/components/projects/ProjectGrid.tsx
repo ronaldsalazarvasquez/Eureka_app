@@ -1,7 +1,5 @@
-
-
 import React from 'react';
-import { Project } from '../types';
+import { Project } from '../../../types';
 import ProjectCard from './ProjectCard';
 
 interface ProjectGridProps {

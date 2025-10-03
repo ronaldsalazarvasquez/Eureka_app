@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SendIcon } from '../constants';
+import { SendIcon } from '../../../constants';
 
 interface CommentFormProps {
     onSubmit: (text: string) => void;

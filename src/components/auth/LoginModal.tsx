@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { User, Role } from '../types';
+import { User, Role } from '../../../types';
+import users from '../../data/users.json';
 
 interface LoginModalProps {
     onClose: () => void;
@@ -15,11 +16,16 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onLogin }) => {
         e.preventDefault();
         setError('');
 
-        // Mock authentication
-        if (email === 'admin@eureka.com' && password === 'admin123') {
-            onLogin({ username: 'Admin User', role: Role.Admin });
-        } else if (email === 'student@eureka.com' && password === 'student123') {
-            onLogin({ username: 'John Doe', role: Role.Student });
+        // Buscar usuario en users.json
+        const foundUser = users.find(
+            u => u.email === email && u.password === password
+        );
+
+        if (foundUser) {
+            onLogin({ 
+                username: foundUser.username, 
+                role: foundUser.role as Role 
+            });
         } else {
             setError('Credenciales inválidas. Por favor, intente de nuevo.');
         }
@@ -65,9 +71,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ onClose, onLogin }) => {
                             required
                         />
                     </div>
-                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                        Use <code className="font-mono bg-gray-200 dark:bg-gray-600 p-1 rounded">admin@eureka.com</code> / <code className="font-mono bg-gray-200 dark:bg-gray-600 p-1 rounded">admin123</code> para rol Admin, o <code className="font-mono bg-gray-200 dark:bg-gray-600 p-1 rounded">student@eureka.com</code> / <code className="font-mono bg-gray-200 dark:bg-gray-600 p-1 rounded">student123</code> para Estudiante.
-                    </p>
                     <footer className="flex items-center justify-end pt-4 space-x-2 border-t border-gray-200 dark:border-gray-600">
                         <button type="button" onClick={onClose} className="text-gray-500 bg-white hover:bg-gray-100 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600">
                             Cancelar

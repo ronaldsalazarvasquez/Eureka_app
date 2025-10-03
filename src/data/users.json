@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "email": "admin@eureka.com",
+    "password": "admin123",
+    "username": "Admin User",
+    "role": "Admin",
+    "avatarUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80",
+    "description": "Coordinador Académico del Departamento de Innovación."
+  },
+  {
+    "id": 2,
+    "email": "ana.torres@eureka.com",
+    "password": "ana123",
+    "username": "Ana Torres",
+    "role": "Student",
+    "avatarUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80",
+    "description": "Estudiante de 9º ciclo de Ingeniería de Software en la Sede Lima."
+  },
+  {
+    "id": 3,
+    "email": "carlos.vega@eureka.com",
+    "password": "carlos123",
+    "username": "Carlos Vega",
+    "role": "Student",
+    "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80",
+    "description": "Investigador y estudiante de doctorado en Ciencias de la Computación en Arequipa. Enfoque en IA aplicada a la agricultura y medio ambiente."
+  },
+  {
+    "id": 4,
+    "email": "sofia.mendez@eureka.com",
+    "password": "sofia123",
+    "username": "Sofia Mendez",
+    "role": "Student",
+    "avatarUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80",
+    "description": "Estudiante de Ingeniería de Sistemas en Cusco, especializada en front-end y UX/UI. Apasionada por la tecnología intuitiva y accesible."
+  },
+  {
+    "id": 5,
+    "email": "luis.ramos@eureka.com",
+    "password": "luis123",
+    "username": "Luis Ramos",
+    "role": "Student",
+    "avatarUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80",
+    "description": "Futuro Ingeniero Civil en Trujillo, interesado en materiales sostenibles y el diseño estructural para comunidades resilientes."
+  },
+  {
+    "id": 6,
+    "email": "maria.quispe@eureka.com",
+    "password": "maria123",
+    "username": "Maria Quispe",
+    "role": "Student",
+    "avatarUrl": "https://images.unsplash.com/photo-1544717297-fa95b6ee864a?q=80",
+    "description": "Estudiante de Desarrollo de Software en Cusco. Crea plataformas digitales para promover la economía local y la cultura."
+  },
+  {
+    "id": 7,
+    "email": "jorge.paredes@eureka.com",
+    "password": "jorge123",
+    "username": "Jorge Paredes",
+    "role": "Student",
+    "avatarUrl": "https://images.unsplash.com/photo-1557862921-37829c790f19?q=80",
+    "description": "Estudiante de Ingeniería Electrónica en Piura. Apasionado por IoT, hardware y sistemas embebidos con impacto social."
+  },
+  {
+    "id": 8,
+    "email": "john.doe@eureka.com",
+    "password": "john123",
+    "username": "John Doe",
+    "role": "Student",
+    "avatarUrl": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80",
+    "description": "Estudiante de Ingeniería de Sistemas, entusiasta de la ciberseguridad y programación competitiva."
+  }
+]

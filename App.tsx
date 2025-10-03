@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { MOCK_PROJECTS, MOCK_AUTHORS } from './constants';
 import { Project, Category, Campus, Status, User, Role, Author, Comment } from './types';
-import Header from './components/Header';
-import FilterBar from './components/FilterBar';
-import ProjectGrid from './components/ProjectGrid';
-import ProjectModal from './components/ProjectModal';
-import SubmitProjectModal from './components/SubmitProjectModal';
-import LoginPage from './components/LoginPage';
-import AdminDashboard from './components/admin/AdminDashboard';
-import ProfileModal from './components/ProfileModal';
-
+import Header from './src/components/ui/Header';
+import FilterBar from './src/components/ui/FilterBar';
+import ProjectGrid from './src/components/projects/ProjectGrid';
+import ProjectModal from './src/components/projects/ProjectModal';
+import SubmitProjectModal from './src/components/projects/SubmitProjectModal';
+import LoginPage from './src/components/auth/LoginPage';
+import AdminDashboard from './src/components/admin/AdminDashboard';
+import ProfileModal from './src/components/projects/ProfileModal';
+import users from './src/data/users.json';
 
 export type NewProjectData = Omit<Project, 'id' | 'status' | 'views' | 'rating' | 'ratingsCount' | 'submissionDate' | 'approvalHistory' | 'comments'>;
 
@@ -50,21 +50,15 @@ const App: React.FC = () => {
     }, [projects, searchTerm, selectedCategory, selectedCampus]);
 
     useEffect(() => {
-        // Inicializar MOCK_AUTHORS con más usuarios si es necesario
-        if (!MOCK_AUTHORS.find(a => a.name === 'John Doe')) {
-             MOCK_AUTHORS.push({
-                name: 'John Doe',
-                description: 'Estudiante de Ingeniería de Sistemas enfocado en la ciberseguridad y el desarrollo de aplicaciones seguras.',
-                avatarUrl: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1887&auto=format&fit=crop'
+    users.forEach(user => {
+        if (!MOCK_AUTHORS.find(a => a.name === user.username)) {
+            MOCK_AUTHORS.push({
+                name: user.username,
+                description: user.description,
+                avatarUrl: user.avatarUrl
             });
         }
-        if (!MOCK_AUTHORS.find(a => a.name === 'Admin User')) {
-             MOCK_AUTHORS.push({
-                name: 'Admin User',
-                description: 'Coordinador Académico del Departamento de Innovación.',
-                avatarUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop'
-            });
-        }
+    });
         
         filterProjects();
     }, [filterProjects]);
