@@ -27,16 +27,20 @@ const AdminActions: React.FC<{ project: Project, onUpdateStatus: (projectId: num
     };
 
     return (
-        <div className="mt-6 p-4 border-2 border-dashed border-blue-400 dark:border-blue-600 bg-blue-50 dark:bg-gray-700/50 rounded-lg">
-            <h4 className="text-lg font-bold mb-3 text-blue-800 dark:text-blue-300">Acciones de Administrador</h4>
-            <div className="flex items-center gap-4">
-                <div className="flex-grow">
-                     <label htmlFor="status-select" className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">Cambiar estado del proyecto:</label>
+        <div className="mt-6 p-6 border border-teal-200 dark:border-teal-800 bg-teal-50/30 dark:bg-teal-900/10 rounded-xl">
+            <h4 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200 flex items-center gap-2">
+                <span className="text-xl">🛡️</span> Acciones de Administrador
+            </h4>
+            <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4">
+                <div className="flex-grow w-full">
+                    <label htmlFor="status-select" className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Cambiar estado del proyecto:
+                    </label>
                     <select
                         id="status-select"
                         value={selectedStatus}
                         onChange={(e) => setSelectedStatus(e.target.value as Status)}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none"
                     >
                         {Object.values(Status).map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
@@ -44,18 +48,24 @@ const AdminActions: React.FC<{ project: Project, onUpdateStatus: (projectId: num
                 <button
                     onClick={handleStatusChange}
                     disabled={selectedStatus === project.status}
-                    className="self-end px-5 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold rounded-lg hover:from-teal-700 hover:to-blue-700 transition-all shadow-md hover:shadow-lg disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                    Guardar
+                    Guardar Cambios
                 </button>
             </div>
         </div>
     );
 };
 
-
-const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, currentUser, onUpdateStatus, onRateProject, onSelectAuthor, onAddNewComment }) => {
-    
+const ProjectModal: React.FC<ProjectModalProps> = ({ 
+    project, 
+    onClose, 
+    currentUser, 
+    onUpdateStatus, 
+    onRateProject, 
+    onSelectAuthor, 
+    onAddNewComment 
+}) => {
     const [hasRated, setHasRated] = useState(false);
 
     const handleRate = (rating: number) => {
@@ -66,112 +76,215 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, currentUs
     };
 
     const handleAuthorClick = () => {
-        onClose(); // Cierra el modal de proyecto
-        onSelectAuthor(project.author); // Abre el modal de perfil
+        onClose();
+        onSelectAuthor(project.author);
     };
 
     const handleCommentSubmit = (text: string) => {
         onAddNewComment(project.id, text);
     };
 
+    const getYouTubeEmbedUrl = (url?: string) => {
+        if (!url) return null;
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+        return match && match[2].length === 11 ? `https://www.youtube.com/embed/${match[2]}` : null;
+    };
+
+    //
+    const videoUrl = "https://www.youtube.com/embed/ooypKDXfEuA"; 
+
     return (
         <div 
-            className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50 p-4"
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex justify-center items-center z-50 p-4 overflow-y-auto"
             onClick={onClose}
         >
             <div 
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto flex flex-col relative"
+                className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-6xl max-h-[95vh] overflow-y-auto relative my-8"
                 onClick={e => e.stopPropagation()}
             >
+                {/* Botón Cerrar */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 dark:hover:text-white transition-colors z-10"
+                    className="sticky top-4 right-4 float-right text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white bg-white/90 dark:bg-gray-800/90 hover:bg-gray-100 dark:hover:bg-gray-700 backdrop-blur-md rounded-full w-10 h-10 flex items-center justify-center transition-all z-20 shadow-lg"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-                
-                <div className="p-8">
-                    <header className="mb-6">
-                        <div className="flex justify-between items-start mb-2">
-                             <p className="text-sm font-semibold text-teal-600 dark:text-teal-400 uppercase">{project.category} - {project.campus}</p>
-                             <StatusBadge status={project.status} />
-                        </div>
-                        <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">{project.title}</h2>
-                        <p className="text-md text-gray-600 dark:text-gray-400 mt-1">
-                            por <button onClick={handleAuthorClick} className="font-semibold text-teal-600 dark:text-teal-400 hover:underline">{project.author}</button>
-                        </p>
-                    </header>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-sm text-gray-700 dark:text-gray-300">
-                        <div className={`flex items-center gap-3 p-3 bg-slate-100 dark:bg-slate-700 rounded-lg ${hasRated ? 'opacity-70' : ''}`}>
-                            <StarRating 
-                                rating={project.rating} 
-                                count={project.ratingsCount} 
-                                isLarge={true} 
-                                onRate={!hasRated ? handleRate : undefined} 
-                            />
-                        </div>
-                        <div className="flex items-center gap-3 p-3 bg-slate-100 dark:bg-slate-700 rounded-lg">
-                            <EyeIcon /> 
-                            <div>
-                                <span className="font-bold text-lg">{project.views.toLocaleString()}</span>
-                                <span className="text-xs block">Visualizaciones</span>
-                            </div>
-                        </div>
-                         <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 p-3 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition-colors">
-                            <GithubIcon />
-                            <span className="font-semibold">Ver en GitHub</span>
-                        </a>
-                    </div>
-                     {hasRated && <p className="text-center text-sm text-green-600 dark:text-green-400 mb-4 -mt-4">¡Gracias por tu calificación!</p>}
-
-                    <div className="space-y-6">
-                        <div>
-                            <h4 className="text-lg font-bold mb-2 flex items-center text-gray-800 dark:text-gray-100"><ProblemIcon />Problemática</h4>
-                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{project.problem}</p>
-                        </div>
-                        <div>
-                            <h4 className="text-lg font-bold mb-2 flex items-center text-gray-800 dark:text-gray-100"><ImpactIcon />Impacto Esperado</h4>
-                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{project.expectedImpact}</p>
-                        </div>
-                         <div>
-                            <h4 className="text-lg font-bold mb-2 flex items-center text-gray-800 dark:text-gray-100"><CodeIcon />Tecnologías Utilizadas</h4>
-                            <div className="flex flex-wrap gap-2">
-                                {project.technologies.map(tech => (
-                                    <span key={tech} className="bg-teal-100 text-teal-800 text-xs font-medium px-2.5 py-1 rounded-full dark:bg-teal-900 dark:text-teal-300">
-                                        {tech}
+                {/* 🎬 HERO SECTION - Video + Header */}
+                <div className="relative bg-gradient-to-r from-teal-600 to-blue-600 p-8 md:p-12 text-white rounded-t-2xl">
+                    <div className="relative z-10">
+                        {/* Header */}
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                            <div className="flex-1">
+                                <div className="flex flex-wrap items-center gap-2 mb-3">
+                                    <span className="text-xs font-semibold bg-white/20 backdrop-blur-md px-3 py-1 rounded-full">
+                                        {project.category}
                                     </span>
-                                ))}
+                                    <span className="text-xs font-semibold bg-white/20 backdrop-blur-md px-3 py-1 rounded-full">
+                                        {project.campus}
+                                    </span>
+                                    <StatusBadge status={project.status} />
+                                </div>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-2">
+                                    {project.title}
+                                </h2>
+                                <p className="text-base opacity-90">
+                                    por{' '}
+                                    <button 
+                                        onClick={handleAuthorClick} 
+                                        className="font-semibold underline underline-offset-2 hover:text-teal-200 transition"
+                                    >
+                                        {project.author}
+                                    </button>
+                                </p>
                             </div>
-                        </div>
-                        <div>
-                            <h4 className="text-lg font-bold mb-2 text-gray-800 dark:text-gray-100">Descripción del Proyecto</h4>
-                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{project.description}</p>
-                        </div>
-                         <div>
-                            <h4 className="text-lg font-bold mb-3 text-gray-800 dark:text-gray-100">Línea de Tiempo de Aprobación</h4>
-                            <Timeline history={project.approvalHistory} />
                         </div>
 
-                         <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-                            <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">Comentarios y Discusión</h3>
-                            <div className="space-y-4">
-                               <CommentForm onSubmit={handleCommentSubmit} />
-                               <CommentThread 
-                                 comments={project.comments || []}
-                                 onAddNewComment={onAddNewComment}
-                                 projectId={project.id}
-                                 currentUser={currentUser}
-                               />
+                        {/* 🎬 Video Embed */}
+                        {videoUrl && (
+                            <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-xl mb-6">
+                                <iframe
+                                    src={videoUrl}
+                                    title="Project Video"
+                                    className="w-full h-full"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                ></iframe>
                             </div>
+                        )}
+
+                        {/* Métricas rápidas */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            <div className="bg-white/10 backdrop-blur-md rounded-lg p-4 text-center">
+                                <p className="text-2xl font-bold">{project.rating.toFixed(1)}</p>
+                                <p className="text-xs opacity-80 mt-1">Rating</p>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-md rounded-lg p-4 text-center">
+                                <p className="text-2xl font-bold">{project.ratingsCount}</p>
+                                <p className="text-xs opacity-80 mt-1">Calificaciones</p>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-md rounded-lg p-4 text-center">
+                                <p className="text-2xl font-bold">{project.views.toLocaleString()}</p>
+                                <p className="text-xs opacity-80 mt-1">Vistas</p>
+                            </div>
+                            <a 
+                                href={project.githubUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="bg-gray-900 hover:bg-gray-800 rounded-lg p-4 text-center transition-all flex flex-col items-center justify-center gap-1 shadow-lg hover:shadow-xl"
+                            >
+                                <GithubIcon />
+                                <p className="text-xs font-semibold">Ver Código</p>
+                            </a>
                         </div>
-                        
-                        {currentUser?.role === Role.Admin && (
-                           <AdminActions project={project} onUpdateStatus={onUpdateStatus} />
+                    </div>
+                </div>
+
+                {/* 📊 CONTENIDO PRINCIPAL */}
+                <div className="p-6 md:p-10 space-y-6">
+
+                    {/* ⭐ Rating Interactivo */}
+                    <div className={`bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 ${hasRated ? 'opacity-60' : ''}`}>
+                        <h4 className="text-base font-semibold mb-3 text-gray-800 dark:text-white flex items-center gap-2">
+                            <span className="text-xl">⭐</span> Califica este proyecto
+                        </h4>
+                        <StarRating 
+                            rating={project.rating} 
+                            count={project.ratingsCount} 
+                            isLarge={true} 
+                            onRate={!hasRated ? handleRate : undefined} 
+                        />
+                        {hasRated && (
+                            <p className="text-sm text-teal-600 dark:text-teal-400 mt-3 font-medium">
+                                ✅ ¡Gracias por tu calificación!
+                            </p>
                         )}
                     </div>
+
+                    {/* 🔥 Secciones de Contenido */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        
+                        {/* Problemática */}
+                        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm">
+                            <h4 className="text-base font-semibold mb-3 flex items-center text-gray-800 dark:text-white gap-2">
+                                <ProblemIcon /> Problemática
+                            </h4>
+                            <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                                {project.problem}
+                            </p>
+                        </div>
+
+                        {/* Impacto Esperado */}
+                        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm">
+                            <h4 className="text-base font-semibold mb-3 flex items-center text-gray-800 dark:text-white gap-2">
+                                <ImpactIcon /> Impacto Esperado
+                            </h4>
+                            <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                                {project.expectedImpact}
+                            </p>
+                        </div>
+
+                    </div>
+
+                    {/* Tecnologías */}
+                    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm">
+                        <h4 className="text-base font-semibold mb-4 flex items-center text-gray-800 dark:text-white gap-2">
+                            <CodeIcon /> Tecnologías Utilizadas
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                            {project.technologies.map(tech => (
+                                <span 
+                                    key={tech} 
+                                    className="bg-teal-100 text-teal-700 text-xs font-semibold px-3 py-1.5 rounded-full dark:bg-teal-900/30 dark:text-teal-300 border border-teal-200 dark:border-teal-800"
+                                >
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Descripción */}
+                    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm">
+                        <h4 className="text-base font-semibold mb-3 text-gray-800 dark:text-white">
+                            📝 Descripción del Proyecto
+                        </h4>
+                        <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                            {project.description}
+                        </p>
+                    </div>
+
+                    {/* Timeline */}
+                    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm">
+                        <h4 className="text-base font-semibold mb-4 text-gray-800 dark:text-white">
+                            📅 Línea de Tiempo de Aprobación
+                        </h4>
+                        <Timeline history={project.approvalHistory} />
+                    </div>
+
+                    {/* Comentarios */}
+                    <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                        <h3 className="text-xl font-bold mb-6 text-gray-800 dark:text-white flex items-center gap-2">
+                            💬 Comentarios y Discusión
+                        </h3>
+                        <div className="space-y-6">
+                            <CommentForm onSubmit={handleCommentSubmit} />
+                            <CommentThread 
+                                comments={project.comments || []}
+                                onAddNewComment={onAddNewComment}
+                                projectId={project.id}
+                                currentUser={currentUser}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Admin Actions */}
+                    {currentUser?.role === Role.Admin && (
+                        <AdminActions project={project} onUpdateStatus={onUpdateStatus} />
+                    )}
+
                 </div>
             </div>
         </div>

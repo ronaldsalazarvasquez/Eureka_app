@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Category, Campus } from '@/types';
 import { NewProjectData } from '@/App';
-//import { NewProjectData } from '../App';
 
-// FIX: Define missing props interface for SubmitProjectModal
 interface SubmitProjectModalProps {
     onClose: () => void;
     onSubmit: (data: NewProjectData) => void;
@@ -20,6 +18,7 @@ const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({ onClose, onSubm
         expectedImpact: '',
         description: '',
         githubUrl: '',
+        videoUrl: '', // 🎬 Nuevo campo
     });
     
     const [errors, setErrors] = useState<Partial<typeof formData>>({});
@@ -42,6 +41,11 @@ const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({ onClose, onSubm
         
         if (formData.githubUrl && !/^https:\/\/github.com\/.+\/.+$/.test(formData.githubUrl)) {
             newErrors.githubUrl = 'Por favor, introduce una URL de GitHub válida.';
+        }
+
+        // 🎬 Validación del video URL (YouTube, Vimeo, etc.)
+        if (formData.videoUrl && !/^https:\/\/(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/.test(formData.videoUrl)) {
+            newErrors.videoUrl = 'Por favor, introduce una URL válida de YouTube o Vimeo.';
         }
         
         setErrors(newErrors);
@@ -133,9 +137,19 @@ const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({ onClose, onSubm
                     <div>
                         {renderInput('technologies', 'Tecnologías (separadas por coma)', false, 'text', 'Ej: React, Node.js, Python')}
                     </div>
+                    
+                    {/* 🎬 Campo de Video URL */}
+                    <div>
+                        {renderInput('videoUrl', 'URL del Video (YouTube o Vimeo)', false, 'url', 'https://www.youtube.com/watch?v=...')}
+                        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                            💡 Opcional: Agrega un video de demostración de tu proyecto
+                        </p>
+                    </div>
+
                     <div>
                         {renderInput('githubUrl', 'URL del Repositorio en GitHub', false, 'url', 'https://github.com/usuario/repo')}
                     </div>
+                    
                     <footer className="flex items-center justify-end pt-4 space-x-2 border-t border-gray-200 dark:border-gray-600">
                         <button type="button" onClick={onClose} className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                             Cancelar
