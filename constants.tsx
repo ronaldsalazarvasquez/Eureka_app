@@ -14,7 +14,7 @@ export const MOCK_PROJECTS: Project[] = [
     description: 'Una aplicación web completa para que los bibliotecarios gestionen el catálogo y los miembros, y para que los estudiantes puedan buscar, reservar y renovar libros en línea.',
     githubUrl: 'https://github.com/example/library-system',
     views: 4258,
-    rating: 4.8,
+    rating: 4.9,
     ratingsCount: 350,
     submissionDate: '2023-09-01',
     approvalHistory: [
